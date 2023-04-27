@@ -1,4 +1,33 @@
-{% include 'layouts/main.html' %}
+{% extends 'layouts/main.html' %}
 {% block content %}
-<h1>Welcome to my project</h1>
+
+<div class="container">
+    <div class="row">
+        {% for category in categoryData %}
+        <div class="col-md-12">
+            <h3>
+                <a href="">{{ category.name }}</a>
+            </h3>
+
+            <div class="row">
+                {% for news in category.news_set.all %}
+                <div class="col-md-4">
+                    <div class="card">
+                        {% if news.image %}
+                        <img src="{{ news.image.url}}" class="card-img-top" alt="...">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="cardtitle">{{ news.title }}</h5>
+                            <p class="card-text">{{ news.description }}</p>
+                            <a href="{% url 'news-details' news.slug %}" class="btn btn-primary">Visit</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock  %}

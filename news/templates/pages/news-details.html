@@ -1,0 +1,32 @@
+{% extends 'layouts/main.html' %}
+
+{% block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Detail news</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="card-title">{{newsData.title}}</h3>
+            {% if newsData.image %}
+            <img src="{{newsData.image.url}}" class="card-img-top" style="object-fit: cover;" alt="..."> 
+            {% endif %}
+            <p class="card-text">{{newsData.description}}</p>
+        </div>
+        {% if relatedNews %}
+        <div class="col-md-4">
+            <h1>Related News</h1>
+            <ul>
+                {% for rnews in relatedNews %}
+                <li><a href="{% url 'news-details' rnews.slug %}">{{ rnews.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
