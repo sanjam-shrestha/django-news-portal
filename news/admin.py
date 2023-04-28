@@ -26,3 +26,4 @@ class NewsAdmin(admin.ModelAdmin):
             return mark_safe(f'<img src={obj.image.url} width="50" height="60">')
         else:
             return 'Image not found'
+

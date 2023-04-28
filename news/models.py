@@ -20,5 +20,10 @@ class News(models.Model):
     def __str__(self):
         return self.title
     
+    def limit_description(self):
+        return self.description[:100]+'...' 
+
     class Meta:
         verbose_name_plural='News'
+
+

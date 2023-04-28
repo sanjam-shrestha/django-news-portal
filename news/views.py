@@ -18,3 +18,22 @@ def news_details(request, slug):
         'relatedNews':related_news,
     }
     return render(request, 'pages/news-details.html', data)
+
+def sports(request):
+    data={
+        'sports':News.objects.all().filter(category=2)
+    }
+    return render(request,'pages/sports.html',data)
+
+def news(request):
+    if request.method == 'POST':
+        search = request.POST.get('search')
+        data={
+            'newsData':News.objects.filter(title__icontains=search)
+        }
+        return render(request,'pages/news.html',data)
+    else:
+        data={
+        'newsData':News.objects.all()
+        }   
+        return render(request,'pages/news.html',data)

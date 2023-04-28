@@ -1,0 +1,25 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        {% for news in newsData %}
+        <div class="col-md-3">
+            <div class="card">
+                {% if news.image %}
+                <img src="{{ news.image.url}}" class="card-img-top" height="250px" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="cardtitle">{{ news.title }}</h5>
+                    <p class="card-text">{{ news.limit_description }}</p>
+                    <a href="{% url 'news-details' news.slug %}" class="btn btn-primary">Visit</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}
