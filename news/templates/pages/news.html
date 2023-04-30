@@ -19,7 +19,29 @@
         </div>
         {% endfor %}
     </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if newsData.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ newsData.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ newsData.number }} of {{ newsData.paginator.num_pages }}.
+            </span>
+
+            {% if newsData.has_next %}
+            <a href="?page={{ newsData.next_page_number }}">next</a>
+            <a href="?page={{ newsData.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+
 </div>
-</div>
+
+
 
 {% endblock %}

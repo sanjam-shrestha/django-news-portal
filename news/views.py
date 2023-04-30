@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
@@ -26,14 +27,23 @@ def sports(request):
     return render(request,'pages/sports.html',data)
 
 def news(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         search = request.POST.get('search')
-        data={
-            'newsData':News.objects.filter(title__icontains=search)
+        n_data = News.objects.filter(title__icontains=search)
+        paginator = Paginator(n_data, 50)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        data = {
+            'newsData': object
         }
-        return render(request,'pages/news.html',data)
+        return render(request, 'pages/news.html', data)
+
     else:
-        data={
-        'newsData':News.objects.all()
-        }   
-        return render(request,'pages/news.html',data)
+        n_data = News.objects.all()
+        paginator = Paginator(n_data, 2)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        data = {
+            'newsData': page_obj,
+        }
+        return render(request, 'pages/news.html', data)
